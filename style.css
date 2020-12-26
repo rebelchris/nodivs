@@ -1,0 +1,23 @@
+.output-wrapper {
+    width: 200px;
+    height: 200px;
+    border: 5px solid #000;
+    overflow: hidden;
+}
+iframe {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+}
+.bg-blue {
+    background: #00BBF9;
+}
+.bg-purple {
+    background: #9B5DE5;
+}
+.text-yellow {
+    color: #FEE440;
+}
+.gradient {
+    background: linear-gradient(90deg, #9b5de5 0%, #f15bb5 100%);
+  }
