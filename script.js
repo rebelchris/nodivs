@@ -10,7 +10,6 @@ document.addEventListener("keyup", (event) => {
     event.target !== cssBefore &&
     event.target !== cssAfter
   ) {
-    console.log("not good");
     return;
   }
   iFrame.open();
@@ -32,7 +31,7 @@ const save = () => {
     before: cssBefore.value,
     after: cssAfter.value,
   });
-  window.location.replace(`https://nodivs.com/${uuid}`);
+  window.location.replace(`https://nodivs.com/view/?id=${uuid}`);
 };
 
 // Your web app's Firebase configuration
@@ -52,11 +51,12 @@ firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 const database = firebase.database();
 
-const currentURL = document.URL;
-const part = currentURL.split("/").pop();
-if (part.length >= 1) {
+const currentURL = window.location.search;
+const search = new URLSearchParams(currentURL);
+const searchId = search.get("id");
+if (searchId.length >= 1) {
   let twitter = document.getElementById("twitter");
-  var noDivRef = firebase.database().ref(part);
+  var noDivRef = firebase.database().ref(searchId);
   noDivRef.once("value", function (data) {
     let divData = data.val();
     if (divData === null) {
