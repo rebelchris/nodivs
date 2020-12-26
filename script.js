@@ -5,8 +5,6 @@ const cssAfter = document.getElementById("cssAfter");
 const iFrame = document.getElementById("iFrame").contentWindow.document;
 
 document.addEventListener("keyup", (event) => {
-  console.log(event.target);
-  console.log(cssBody);
   if (
     event.target !== cssBody &&
     event.target !== cssBefore &&
@@ -15,7 +13,6 @@ document.addEventListener("keyup", (event) => {
     console.log("not good");
     return;
   }
-  console.log(cssBody.value);
   iFrame.open();
   iFrame.writeln(`
     <style>
@@ -25,3 +22,61 @@ document.addEventListener("keyup", (event) => {
     </style>`);
   iFrame.close();
 });
+
+const save = () => {
+  var person = prompt("Please enter your Twitter handle", "DailyDevTips1");
+  const uuid = Date.now().toString(36) + Math.random().toString(36).substr(2);
+  firebase.database().ref(uuid).set({
+    person: person,
+    body: cssBody.value,
+    before: cssBefore.value,
+    after: cssAfter.value,
+  });
+  window.location.replace(`https://nodivs.com/${uuid}`);
+};
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+var firebaseConfig = {
+  apiKey: "AIzaSyBYF9riAviUU37U89OO-b-oLHq5ES5DBTw",
+  authDomain: "nodivs-6d4ce.firebaseapp.com",
+  databaseURL: "https://nodivs-6d4ce-default-rtdb.firebaseio.com",
+  projectId: "nodivs-6d4ce",
+  storageBucket: "nodivs-6d4ce.appspot.com",
+  messagingSenderId: "277226508761",
+  appId: "1:277226508761:web:017ff9f00bc1647fae09c8",
+  measurementId: "G-4W0PJ5FHWD",
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+const database = firebase.database();
+
+const currentURL = document.URL;
+const part = currentURL.split("/").pop();
+if (part.length >= 1) {
+  let twitter = document.getElementById("twitter");
+  var noDivRef = firebase.database().ref(part);
+  noDivRef.once("value", function (data) {
+    let divData = data.val();
+    if (divData === null) {
+      divData = {
+        person: "Unkown",
+        body: "background: red;",
+        before: 'content: "Sorry, couldn\'t find this one"',
+      };
+    }
+
+    twitter.href = `https://twitter.com/${divData.person}`;
+    twitter.innerHTML = divData.person;
+
+    iFrame.open();
+    iFrame.writeln(`
+    <style>
+    body { ${divData.body} }
+    body:before { ${divData.before} }
+    body:after { ${divData.after} }
+    </style>`);
+    iFrame.close();
+  });
+}

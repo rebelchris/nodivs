@@ -1,7 +1,6 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-
     <title>No-div playground</title>
     <link rel="stylesheet" href="./style.css" />
     <link
@@ -52,11 +51,9 @@
                 Look mum no divs!
               </h1>
               <p class="leading-normal mb-16">
-                In this playground you are limited to use just the body tag,
-                I've predefined the :before and :after pseudo elements for you.
-                <br /><br />
-                Have fun and let me know what you created on Twitter using the
-                #nodivs hashtag.
+                Look at this amazing artwork!
+                <br /><br />And the cool part no-divs! <br /><br />
+                mum is verry proud ❤️
               </p>
             </div>
             <!--Right Col-->
@@ -111,52 +108,27 @@
 
       <div class="container m-auto px-6 md:px-0">
         <div
-          class="flex flex-col md:flex-row bg-white p-6 my-16 rounded-xl shadow-2xl"
+          class="flex flex-col bg-white p-6 my-16 rounded-xl shadow-2xl w-96 m-auto text-center"
         >
-          <div
-            class="w-full md:w-1/2 bg-black text-white p-6 rounded-xl mb-8 md:mb-0"
+          <p>
+            Made by
+            <a
+              href=""
+              class="underline hover:no-underline focus:no-underline"
+              target="_blank"
+              rel="nofollow"
+              id="twitter"
+            ></a>
+          </p>
+          <div class="output-wrapper m-auto shadow-xl">
+            <iframe id="iFrame"></iframe>
+          </div>
+          <a
+            class="bg-purple m-auto mt-4 rounded-xl p-4 text-white uppercase shadow-sm hover:shadow-md"
+            href="/"
           >
-            body {<br />
-            <div class="ml-4">
-              <textarea
-                class="w-full h-20 text-black resize-none"
-                id="cssBody"
-                placeholder="background: red;"
-              ></textarea>
-              <br />
-              &:before {<br />
-              <div class="ml-4">
-                <textarea
-                  class="w-full h-20 text-black resize-none"
-                  id="cssBefore"
-                  placeholder="content: '🤟';"
-                ></textarea>
-              </div>
-              } &:after {
-              <br />
-              <div class="ml-4">
-                <textarea
-                  class="w-full h-20 text-black resize-none"
-                  id="cssAfter"
-                  placeholder="content: '🤟';"
-                ></textarea>
-              </div>
-              }
-              <br />
-            </div>
-            }
-          </div>
-          <div class="w-full md:w-1/2 flex flex-col align-center">
-            <div class="output-wrapper m-auto shadow-xl">
-              <iframe id="iFrame"></iframe>
-            </div>
-            <button
-              class="bg-purple m-auto rounded-xl p-4 text-white uppercase shadow-sm hover:shadow-md"
-              onclick="save()"
-            >
-              I'm done ✨
-            </button>
-          </div>
+            I want to make one 👀
+          </a>
         </div>
       </div>
       <footer class="p-6 text-center bg-purple text-yellow shadow-xl">
